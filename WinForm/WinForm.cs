@@ -13,6 +13,7 @@ namespace WinForm
     public partial class WinForm : Form
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private const int cfrFibonacci = 10;
         public WinForm()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace WinForm
             BusyForm bs = new BusyForm();
             ((Button)sender).Enabled = false;
 
-            Task<int> tkRes = Task.Run(() => new Fibonacci.SwFibonacci().Fibonacci(10));
+            Task<int> tkRes = Task.Run(() => new Fibonacci.SwFibonacci().Fibonacci(cfrFibonacci));
             tkRes.GetAwaiter().OnCompleted(() => bs.Dispose());
 
             bs.ShowDialog(this);
