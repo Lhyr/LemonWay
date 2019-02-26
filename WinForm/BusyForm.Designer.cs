@@ -53,6 +53,7 @@
             this.MinimizeBox = false;
             this.Name = "BusyForm";
             this.Opacity = 0.75D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Working in progress ...";
             this.ResumeLayout(false);
 
