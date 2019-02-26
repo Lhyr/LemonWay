@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WebService_testUnitaire.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WebService_testUnitaire_SwFibonacci_SwFibonacci" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/WebService/SwFibonacci.asmx</Value>
+    </Setting>
+    <Setting Name="WebService_testUnitaire_SwXmlToJson_SwXmlToJson" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/WebService/SwXmlToJson.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
