@@ -31,7 +31,7 @@ namespace WebService
         [WebMethod(Description = "Permet de convertir une chaine XML en une chaine JSon possédant les mêmes caractéristiques.")]
         public string XmlToJson(string xml)
         {
-            log.Info(HttpContext.Current.Request.Url + " " + xml);
+            log.Info(HttpContext.Current.Request.Url + " " + HttpContext.Current.Request.UserHostAddress + " " + xml);
             XElement xmlDoc;
             try
             {

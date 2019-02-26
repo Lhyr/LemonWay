@@ -44,7 +44,7 @@ namespace WebService
         [WebMethod(Description = "Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100")]
         public int Fibonacci(int n)
         {
-            log.Info(HttpContext.Current.Request.Url + " " + n.ToString());
+            log.Info(HttpContext.Current.Request.Url + " " + HttpContext.Current.Request.UserHostAddress + " " + n.ToString());
             if (n < 1 || n > 100)
             {
                 return -1;
