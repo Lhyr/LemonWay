@@ -23,20 +23,6 @@ namespace WebService
            = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Fonction qui calcule récursivement la suite de Fibonacci et renvoie le résultat.
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <returns></returns>
-        private System.Numerics.BigInteger Fib(int nombre)
-        {
-            if (nombre < 2)
-            {
-                return nombre;
-            }
-            return Fib(nombre - 1) + Fib(nombre - 2);
-        }
-
-        /// <summary>
         /// Permet de calculer itérativement le Neme élement de la suite de Fibonacci,
         /// suivant ce qui est entré en paramètre.
         /// </summary>
@@ -101,7 +87,7 @@ namespace WebService
 
             log.Info("résultat : " + res.ToString());
 
-            return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(res);
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(res.ToString());
         }
     }
 }
