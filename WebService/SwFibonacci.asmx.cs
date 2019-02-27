@@ -10,6 +10,7 @@ namespace WebService
     /// <summary>
     /// Description résumée de Fibonacci
     /// </summary>
+    [System.Web.Script.Services.ScriptService]
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
@@ -55,6 +56,30 @@ namespace WebService
             log.Info("résultat : " + res.ToString());
 
             return res;
+        }
+
+
+        /// <summary>
+        /// Fonction qui prend en paramètre un nombre compris entre 1 et 100
+        /// et retourne en résultat le calcul de la suite de Fibonacci.
+        /// </summary>
+        /// <param name="n">le nombre que l'on souhaite dans la suite</param>
+        /// <returns>le calcul de la suite.</returns>
+        [WebMethod(Description = "Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100")]
+        [System.Web.Script.Services.ScriptMethod(UseHttpGet = true, ResponseFormat = System.Web.Script.Services.ResponseFormat.Json)]
+        public string FibonacciJSon(int n)
+        {
+            log.Info(HttpContext.Current.Request.Url + " " + HttpContext.Current.Request.UserHostAddress + " " + n.ToString());
+            if (n < 1 || n > 100)
+            {
+                return "-1";
+            }
+
+            int res = Fib(n);
+
+            log.Info("résultat : " + res.ToString());
+
+            return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(res);
         }
     }
 }
