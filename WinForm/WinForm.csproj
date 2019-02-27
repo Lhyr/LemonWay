@@ -65,6 +65,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\XmlToJson\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="WinForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +112,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\Fibonacci\SwFibonacci.wsdl" />
+    <None Include="Web References\XmlToJson\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\XmlToJson\SwXmlToJson.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -129,12 +139,26 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>WinForm_Fibonacci_SwFibonacci</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/WebService/SwXmlToJson.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\XmlToJson\</RelPath>
+      <UpdateFromURL>http://localhost/WebService/SwXmlToJson.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WinForm_XmlToJson_SwXmlToJson</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\Fibonacci\SwFibonacci.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1471423101.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\XmlToJson\SwXmlToJson.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

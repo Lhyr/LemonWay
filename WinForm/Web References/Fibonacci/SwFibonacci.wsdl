@@ -12,10 +12,25 @@
       <s:element name="FibonacciResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="FibonacciResult" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FibonacciResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="FibonacciJSon">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="n" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FibonacciJSonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FibonacciJSonResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="FibonacciSoapIn">
@@ -24,17 +39,85 @@
   <wsdl:message name="FibonacciSoapOut">
     <wsdl:part name="parameters" element="tns:FibonacciResponse" />
   </wsdl:message>
+  <wsdl:message name="FibonacciJSonSoapIn">
+    <wsdl:part name="parameters" element="tns:FibonacciJSon" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciJSonSoapOut">
+    <wsdl:part name="parameters" element="tns:FibonacciJSonResponse" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciHttpGetIn">
+    <wsdl:part name="n" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciJSonHttpGetIn">
+    <wsdl:part name="n" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciJSonHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciHttpPostIn">
+    <wsdl:part name="n" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciJSonHttpPostIn">
+    <wsdl:part name="n" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FibonacciJSonHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:portType name="SwFibonacciSoap">
     <wsdl:operation name="Fibonacci">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100</wsdl:documentation>
       <wsdl:input message="tns:FibonacciSoapIn" />
       <wsdl:output message="tns:FibonacciSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100</wsdl:documentation>
+      <wsdl:input message="tns:FibonacciJSonSoapIn" />
+      <wsdl:output message="tns:FibonacciJSonSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SwFibonacciHttpGet">
+    <wsdl:operation name="Fibonacci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100</wsdl:documentation>
+      <wsdl:input message="tns:FibonacciHttpGetIn" />
+      <wsdl:output message="tns:FibonacciHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100</wsdl:documentation>
+      <wsdl:input message="tns:FibonacciJSonHttpGetIn" />
+      <wsdl:output message="tns:FibonacciJSonHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SwFibonacciHttpPost">
+    <wsdl:operation name="Fibonacci">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100</wsdl:documentation>
+      <wsdl:input message="tns:FibonacciHttpPostIn" />
+      <wsdl:output message="tns:FibonacciHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de calculer la suite de Fibonacci, avec un nombre donné, compris entre 1 et 100</wsdl:documentation>
+      <wsdl:input message="tns:FibonacciJSonHttpPostIn" />
+      <wsdl:output message="tns:FibonacciJSonHttpPostOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="SwFibonacciSoap" type="tns:SwFibonacciSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Fibonacci">
       <soap:operation soapAction="http://tempuri.org/Fibonacci" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <soap:operation soapAction="http://tempuri.org/FibonacciJSon" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -54,6 +137,57 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <soap12:operation soapAction="http://tempuri.org/FibonacciJSon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SwFibonacciHttpGet" type="tns:SwFibonacciHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Fibonacci">
+      <http:operation location="/Fibonacci" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <http:operation location="/FibonacciJSon" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SwFibonacciHttpPost" type="tns:SwFibonacciHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Fibonacci">
+      <http:operation location="/Fibonacci" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FibonacciJSon">
+      <http:operation location="/FibonacciJSon" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="SwFibonacci">
     <wsdl:port name="SwFibonacciSoap" binding="tns:SwFibonacciSoap">
@@ -61,6 +195,12 @@
     </wsdl:port>
     <wsdl:port name="SwFibonacciSoap12" binding="tns:SwFibonacciSoap12">
       <soap12:address location="http://localhost/WebService/SwFibonacci.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SwFibonacciHttpGet" binding="tns:SwFibonacciHttpGet">
+      <http:address location="http://localhost/WebService/SwFibonacci.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SwFibonacciHttpPost" binding="tns:SwFibonacciHttpPost">
+      <http:address location="http://localhost/WebService/SwFibonacci.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

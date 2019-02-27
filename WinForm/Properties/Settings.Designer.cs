@@ -32,5 +32,15 @@ namespace WinForm.Properties {
                 return ((string)(this["WinForm_Fibonacci_SwFibonacci"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/WebService/SwXmlToJson.asmx")]
+        public string WinForm_XmlToJson_SwXmlToJson {
+            get {
+                return ((string)(this["WinForm_XmlToJson_SwXmlToJson"]));
+            }
+        }
     }
 }

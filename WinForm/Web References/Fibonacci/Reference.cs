@@ -31,6 +31,8 @@ namespace WinForm.Fibonacci {
         
         private System.Threading.SendOrPostCallback FibonacciOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FibonacciJSonOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -73,11 +75,14 @@ namespace WinForm.Fibonacci {
         public event FibonacciCompletedEventHandler FibonacciCompleted;
         
         /// <remarks/>
+        public event FibonacciJSonCompletedEventHandler FibonacciJSonCompleted;
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Fibonacci", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public int Fibonacci(int n) {
+        public string Fibonacci(int n) {
             object[] results = this.Invoke("Fibonacci", new object[] {
                         n});
-            return ((int)(results[0]));
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -98,6 +103,35 @@ namespace WinForm.Fibonacci {
             if ((this.FibonacciCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.FibonacciCompleted(this, new FibonacciCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FibonacciJSon", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string FibonacciJSon(int n) {
+            object[] results = this.Invoke("FibonacciJSon", new object[] {
+                        n});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FibonacciJSonAsync(int n) {
+            this.FibonacciJSonAsync(n, null);
+        }
+        
+        /// <remarks/>
+        public void FibonacciJSonAsync(int n, object userState) {
+            if ((this.FibonacciJSonOperationCompleted == null)) {
+                this.FibonacciJSonOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFibonacciJSonOperationCompleted);
+            }
+            this.InvokeAsync("FibonacciJSon", new object[] {
+                        n}, this.FibonacciJSonOperationCompleted, userState);
+        }
+        
+        private void OnFibonacciJSonOperationCompleted(object arg) {
+            if ((this.FibonacciJSonCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FibonacciJSonCompleted(this, new FibonacciJSonCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -138,10 +172,36 @@ namespace WinForm.Fibonacci {
         }
         
         /// <remarks/>
-        public int Result {
+        public string Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    public delegate void FibonacciJSonCompletedEventHandler(object sender, FibonacciJSonCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3190.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FibonacciJSonCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FibonacciJSonCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
             }
         }
     }
